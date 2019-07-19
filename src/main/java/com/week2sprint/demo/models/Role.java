@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public class Role
+public class Role extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

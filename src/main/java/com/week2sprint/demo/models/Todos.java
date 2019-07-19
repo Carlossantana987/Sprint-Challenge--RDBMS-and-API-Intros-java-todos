@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "quotes")
-public class Todos
+public class Todos extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
