@@ -62,5 +62,4 @@ public class Role extends Auditable
     {
         this.userRoles = userRoles;
     }
-
 }

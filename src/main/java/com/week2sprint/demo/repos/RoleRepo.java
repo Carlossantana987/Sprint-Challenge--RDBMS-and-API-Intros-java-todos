@@ -20,5 +20,3 @@ public interface RoleRepo extends CrudRepository<Role, Long>
     void insertUserRoles(long userid, long roleid);
 
 }
-{
-}

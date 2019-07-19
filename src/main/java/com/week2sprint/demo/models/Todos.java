@@ -1,11 +1,8 @@
 package com.week2sprint.demo.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
-
 
 @Entity
 @Table(name = "quotes")
@@ -13,37 +10,35 @@ public class Todos extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long todoId;
+    private long Todoid;
 
+    @Column(nullable = false)
     private String description;
-    private boolean completed;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid",
-                nullable = false)
+            nullable = false)
     @JsonIgnoreProperties({"quotes", "hibernateLazyInitializer"})
     private User user;
 
     public Todos()
     {
-
     }
 
-    public Todos(String description, boolean completed, User user)
+    public Todos(String desc, User user)
     {
-        this.description = description;
-        this.completed = completed;
+        this.description = desc;
         this.user = user;
     }
 
-    public long getTodoId()
+    public long getTodoid()
     {
-        return todoId;
+        return Todoid;
     }
 
-    public void setTodoId(long todoId)
+    public void setTodoid(long todoid)
     {
-        this.todoId = todoId;
+        Todoid = todoid;
     }
 
     public String getDescription()
@@ -54,16 +49,6 @@ public class Todos extends Auditable
     public void setDescription(String description)
     {
         this.description = description;
-    }
-
-    public boolean isCompleted()
-    {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed)
-    {
-        this.completed = completed;
     }
 
     public User getUser()

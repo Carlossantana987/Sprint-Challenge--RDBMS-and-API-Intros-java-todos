@@ -1,15 +1,12 @@
 package com.week2sprint.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.domain.Auditable;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-
-
 @Table(name = "userroles")
 public class UserRoles extends Auditable implements Serializable
 {
