@@ -4,7 +4,7 @@ package com.week2sprint.demo.services;
 
 
 
-import com.week2sprint.demo.View.CountQuotes;
+import com.week2sprint.demo.View.CountTodo;
 import com.week2sprint.demo.models.Todos;
 import com.week2sprint.demo.repos.TodoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class TodosServiceImp implements TodosServices
     private TodoRepo todorepos;
 
     @Override
-    public ArrayList<CountQuotes> getCountQuotes()
+    public ArrayList<CountTodo> getCountQuotes()
     {
         return todorepos.getCountQuotes();
     }
@@ -38,7 +38,7 @@ public class TodosServiceImp implements TodosServices
     }
 
     @Override
-    public Todos findQuoteById(long id)
+    public Todos findTodoById(long id)
     {
         return todorepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
     }
@@ -64,9 +64,9 @@ public class TodosServiceImp implements TodosServices
 
     @Transactional
     @Override
-    public Todos save(Todos quote)
+    public Todos save(Todos todo)
     {
-        return todorepos.save(quote);
+        return todorepos.save(todo);
     }
 
     @Override
@@ -82,19 +82,19 @@ public class TodosServiceImp implements TodosServices
     @Override
     public Todos update(Todos todo, long id)
     {
-        Todos newQuote = todorepos.findById(id)
+        Todos newTodo = todorepos.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
 
-        if (todo.getDescription() != null)
+        if (todo.getTodo() != null)
         {
-            newQuote.setDescription(todo.getDescription());
+            newTodo.setTodo(todo.getTodo());
         }
 
         if (todo.getUser() != null)
         {
-            newQuote.setUser(todo.getUser());
+            newTodo.setUser(todo.getUser());
         }
 
-        return todorepos.save(newQuote);
+        return todorepos.save(newTodo);
     }
 }

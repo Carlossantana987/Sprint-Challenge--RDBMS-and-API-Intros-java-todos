@@ -33,6 +33,7 @@ public class UserServiceImp implements UserDetailsService, UserServices
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
+
         User user = userrepos.findByUsername(username);
         if (user == null)
         {
@@ -82,13 +83,14 @@ public class UserServiceImp implements UserDetailsService, UserServices
         }
         newUser.setUserRoles(newRoles);
 
-        for (Todos q : user.getQuotes())
+        for (Todos t : user.getTodos())
         {
-            newUser.getQuotes().add( new Quote(q.getQuote(), newUser));
+            newUser.getTodos().add( new Todos(t.getTodo(), newUser,t.isComplete()));
         }
 
         return userrepos.save(newUser);
     }
+
 
     @Override
     public User findUserByName(String name)
@@ -128,23 +130,19 @@ public class UserServiceImp implements UserDetailsService, UserServices
 
                 if (user.getUserRoles().size() > 0)
                 {
-                    // with so many relationships happening, I decided to go
-                    // with old school queries
-                    // delete the old ones
                     rolerepos.deleteUserRolesByUserId(currentUser.getUserid());
 
-                    // add the new ones
                     for (UserRoles ur : user.getUserRoles())
                     {
                         rolerepos.insertUserRoles(id, ur.getRole().getRoleid());
                     }
                 }
 
-                if (user.getDescription().size() > 0)
+                if (user.getTodos().size() > 0)
                 {
-                    for (Todos t : user.getDescription())
+                    for (Todos q : user.getTodos())
                     {
-                        currentUser.getDescription().add( new Todos( t.getDescription(), currentUser));
+                        currentUser.getTodos().add( new Todos(q.getTodo(),currentUser, q.isComplete()));
                     }
                 }
                 return userrepos.save(currentUser);
@@ -161,3 +159,4 @@ public class UserServiceImp implements UserDetailsService, UserServices
 
     }
 }
+

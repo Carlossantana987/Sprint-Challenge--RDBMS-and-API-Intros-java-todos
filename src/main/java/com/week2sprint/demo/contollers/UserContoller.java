@@ -1,8 +1,8 @@
 package com.week2sprint.demo.contollers;
 
+import com.week2sprint.demo.models.User;
 import com.week2sprint.demo.services.UserServices;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,8 +35,7 @@ public class UserContoller
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/user/{userId}", produces = {"application/json"})
-    public ResponseEntity<?> getUser(@PathVariable
-                                             Long userId)
+    public ResponseEntity<?> getUser(@PathVariable Long userId)
     {
         User u = userService.findUserById(userId);
         return new ResponseEntity<>(u, HttpStatus.OK);
@@ -54,8 +53,7 @@ public class UserContoller
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addNewUser(@Valid
-                                        @RequestBody User newuser) throws URISyntaxException
+    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
     {
         newuser =  userService.save(newuser);
 

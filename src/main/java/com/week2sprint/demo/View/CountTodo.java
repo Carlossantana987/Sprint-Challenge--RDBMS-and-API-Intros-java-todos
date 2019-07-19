@@ -1,7 +1,7 @@
 package com.week2sprint.demo.View;
 
-public interface CountQuotes
+public interface CountTodo
 {
     String getUsername();
-    int getCountquotes();
+    int getCountTodos();
 }

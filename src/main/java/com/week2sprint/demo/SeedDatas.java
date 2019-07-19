@@ -1,14 +1,28 @@
-// provided by Vivek Vishwanath
+package com.week2sprint.demo;
+
+import com.week2sprint.demo.models.Role;
+import com.week2sprint.demo.models.Todos;
+import com.week2sprint.demo.models.User;
+import com.week2sprint.demo.models.UserRoles;
+import com.week2sprint.demo.repos.RoleRepo;
+import com.week2sprint.demo.repos.TodoRepo;
+import com.week2sprint.demo.repos.UserRepo;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Transactional
 @Component
-public class SeedData implements CommandLineRunner
+public class SeedDatas implements CommandLineRunner
 {
-    RoleRepository rolerepos;
-    UserRepository userrepos;
-    ToDoRepository todorepos;
+    RoleRepo rolerepos;
+    UserRepo userrepos;
+    TodoRepo todorepos;
 
-    public SeedData(RoleRepository rolerepos, UserRepository userrepos, ToDoRepository todorepos)
+    public SeedDatas(RoleRepo rolerepos, UserRepo userrepos, TodoRepo todorepos)
     {
         this.rolerepos = rolerepos;
         this.userrepos = userrepos;
@@ -27,17 +41,17 @@ public class SeedData implements CommandLineRunner
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
         User u1 = new User("barnbarn", "ILuvM4th!", users);
-        u1.getTodos().add(new Todo("Finish java-orders-swagger", new Date(), u1));
-        u1.getTodos().add(new Todo("Feed the turtles", new Date(), u1));
-        u1.getTodos().add(new Todo("Complete the sprint challenge", new Date(), u1));
+        u1.getTodos().add(new Todos("Finish java-orders-swagger", u1, true));
+        u1.getTodos().add(new Todos("Feed the turtles", u1, true));
+        u1.getTodos().add(new Todos("Complete the sprint challege", u1,false));
         userrepos.save(u1);
 
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(), r1));
         admins.add(new UserRoles(new User(), r2));
         User u2 = new User("admin", "password", admins);
-        u2.getTodos().add(new Todo("Walk the dogs", new Date(), u2));
-        u2.getTodos().add(new Todo("provide feedback to my instructor", new Date(), u2));
+        u2.getTodos().add(new Todos("Walk the dogs", u2, false));
+        u2.getTodos().add(new Todos("provide feedback to my instructor", u2, true));
         userrepos.save(u2);
 
         users = new ArrayList<>();
@@ -51,3 +65,4 @@ public class SeedData implements CommandLineRunner
         userrepos.save(u4);
     }
 }
+

@@ -1,6 +1,6 @@
 package com.week2sprint.demo.services;
 
-import com.week2sprint.demo.View.CountQuotes;
+import com.week2sprint.demo.View.CountTodo;
 import com.week2sprint.demo.models.Todos;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public interface TodosServices
 {
     List<Todos> findAll();
 
-    Todos findQuoteById(long id);
+    Todos findTodoById(long id);
 
     List<Todos> findByUserName (String username);
 
@@ -20,5 +20,5 @@ public interface TodosServices
 
     Todos update(Todos todos, long id);
 
-    ArrayList<CountQuotes> getCountQuotes();
+    ArrayList<CountTodo> getCountQuotes();
 }

@@ -1,6 +1,8 @@
 package com.week2sprint.demo.services;
 
-import org.apache.catalina.User;
+//import org.apache.catalina.User;
+
+import com.week2sprint.demo.models.User;
 
 import java.util.List;
 
